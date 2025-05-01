@@ -1,0 +1,1384 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Embedding-based Trend Analysis in NeurIPS Publication &#8212; JSC370 Final Project</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'embedding_trend_analysis';</script>
+    <link rel="icon" href="_static/logo.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Interactive Figures {.tabset}" href="interactive_figures.html" />
+    <link rel="prev" title="NeurIPS Trends (1987 – 2023)" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">JSC370 Final Project</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    NeurIPS Trends (1987 – 2023)
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Embedding-based Trend Analysis in NeurIPS Publication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive_figures.html">Interactive Figures {.tabset}</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/<your-user>/<your-repo>" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/<your-user>/<your-repo>/issues/new?title=Issue%20on%20page%20%2Fembedding_trend_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/embedding_trend_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Embedding-based Trend Analysis in NeurIPS Publication</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">2. Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-acquisition">2.1 Data Acquisition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-and-preparation">2.2 Data Cleaning and Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-analysis">2.3 Exploratory Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-and-clustering">2.4 Embedding and Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-modeling-and-evaluation">2.5 Trend Modeling and Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-visualization">2.6 Interactive Visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">3 Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-considerations">3.1 Data Quality Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trends-in-publication-volume">3.2 Trends in Publication Volume</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trends-in-title-length">3.3 Trends in Title Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trends-in-abstract-length">3.4 Trends in Abstract Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-of-trend-prediction-models">3.5 Performance of Trend-prediction Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-landscape-and-growth-patterns">3.6 Topic Landscape and Growth Patterns</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-trends-1987-2024">3.6.1 Long-term Trends (1987-2024)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recent-trends-2020-2024">3.6.2 Recent Trends (2020-2024)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-and-insights">3.6.3 Interpretation and Insights</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions-and-summary">4.Conclusions and Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">4.1 Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions">4.2 Future Directions</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="embedding-based-trend-analysis-in-neurips-publication">
+<h1>Embedding-based Trend Analysis in NeurIPS Publication<a class="headerlink" href="#embedding-based-trend-analysis-in-neurips-publication" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The Conference on Neural Information Processing Systems (NeurIPS) has grown from a small workshop on connectionist models in 1987 to the world’s largest gathering of machine-learning researchers today.  The size of the yearly proceedings increased from fewer than 70 papers at its inception to more than 3 500 papers in 2023, reflecting both the rapid acceleration of artificial-intelligence research and the expanding scope of the conference itself.  While this growth is a testament to scientific progress, it makes it increasingly difficult to keep track of which topics are emerging, which are maturing, and which may be losing momentum.</p>
+<p>This project assembles a longitudinal corpus of 40586 NeurIPS papers spanning the years 1987-2023 and uses that corpus to address two main questions:</p>
+<ol class="arabic simple">
+<li><p><strong>Descriptive question</strong> - How have basic publication characteristics such as volume, title length, and abstract length changed over time?</p></li>
+<li><p><strong>Thematic question</strong> - Which research topics are presently growing fastest and which are stagnating or declining?</p></li>
+</ol>
+<p>To answer the descriptive question we first scrape the official NeurIPS website, harmonise its historical HTML changes, and build a cleaned CSV that contains titles, abstracts, and publication years for every accepted paper.  Simple time-series plots of paper counts and text-length statistics give a high-level view of the conference’s expansion.</p>
+<p>The thematic question requires a richer representation of content.  We embed every title-abstract pair with the SPECTER2 scientific-text encoder, reduce the 768-dimensional embeddings to two dimensions with UMAP for visualisation, and cluster them with the density-based algorithm HDBSCAN.  Class-based TF–IDF is then used to derive concise topic labels for each cluster.  For every cluster we model the yearly paper counts using four regression families—ordinary least squares, ridge, random forest, and gradient boosting—and compute the slope of the best-fit line through the model-predicted counts.  A positive slope signals a rising topic, whereas a negative slope indicates decline.  Gradient boosting achieves the lowest out-of-sample root-mean-squared error and is therefore chosen for the final interactive map.</p>
+<p>The end product is a GitHub Pages website that hosts:</p>
+<ul class="simple">
+<li><p>a concise, text-based summary of the project;</p></li>
+<li><p>an interactive 2-D map where each point is a NeurIPS paper, coloured by the growth rate of its topic cluster;</p></li>
+<li><p>downloadable PDF and supporting code that reproduce all figures and tables.</p></li>
+</ul>
+<p>Beyond NeurIPS, the pipeline offers a general recipe for large-scale, time-aware text analysis and can be applied to any research corpus that provides abstracts and publication dates.</p>
+</section>
+<section id="methods">
+<h2>2. Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<section id="data-acquisition">
+<h3>2.1 Data Acquisition<a class="headerlink" href="#data-acquisition" title="Link to this heading">#</a></h3>
+<p>The dataset consists of papers accepted at the Conference on Neural Information Processing Systems (NeurIPS) from 1987 to 2023. Due to structural changes on the NeurIPS website, two distinct web scraping methods were necessary: one approach covering the years 1987 to 2021, and another specifically adapted for 2022 and 2023. Both utilized Python libraries <code class="docutils literal notranslate"><span class="pre">requests</span></code> for fetching webpage content, <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> for parsing HTML, and <code class="docutils literal notranslate"><span class="pre">ThreadPoolExecutor</span></code> for concurrent requests, significantly improving data retrieval efficiency. The extracted data included paper titles, abstracts, and corresponding publication years, which were then consolidated into CSV files for further analysis.</p>
+</section>
+<section id="data-cleaning-and-preparation">
+<h3>2.2 Data Cleaning and Preparation<a class="headerlink" href="#data-cleaning-and-preparation" title="Link to this heading">#</a></h3>
+<p>After collection, the dataset underwent rigorous cleaning to ensure high data quality and consistency. Entries lacking abstracts or containing insufficient abstracts (fewer than five words) were removed, as these offered limited analytical value. Additionally, supplementary attributes such as abstract and title word counts were computed to identify potential anomalies. This resulted in a final, cleaned dataset comprising approximately 40,000 papers, which served as a reliable basis for subsequent analyses.</p>
+</section>
+<section id="exploratory-analysis">
+<h3>2.3 Exploratory Analysis<a class="headerlink" href="#exploratory-analysis" title="Link to this heading">#</a></h3>
+<p>The initial exploratory analysis aimed to reveal overarching publication trends and textual characteristics within NeurIPS papers over time. Utilizing Python libraries such as <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, and <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>, we examined temporal patterns in publication counts, abstract lengths, and title lengths. This exploratory step established foundational insights, revealing increases in publication volume and abstract length complexity, guiding our decisions for more advanced analytical methods.</p>
+</section>
+<section id="embedding-and-clustering">
+<h3>2.4 Embedding and Clustering<a class="headerlink" href="#embedding-and-clustering" title="Link to this heading">#</a></h3>
+<p>To deeply understand thematic and semantic structures within NeurIPS papers, we employed embedding-based methods. Specifically, we selected the SPECTER2 model (<code class="docutils literal notranslate"><span class="pre">allenai/specter2_base</span></code>) from Hugging Face Transformers, renowned for effectively capturing semantic nuances of scientific literature. SPECTER2 embeddings are particularly suitable due to their ability to represent research papers in a vector space that closely aligns with citation patterns and topical relevance.</p>
+<p>Given the high dimensionality of these embeddings, dimensionality reduction was essential for meaningful visualization and efficient clustering. We chose UMAP (<code class="docutils literal notranslate"><span class="pre">umap-learn</span></code>) for this task due to its effectiveness in preserving local and global structures within data compared to other methods like PCA or t-SNE.</p>
+<p>Subsequently, clustering was conducted using HDBSCAN, a density-based algorithm capable of identifying naturally occurring clusters without the need for predefined cluster counts. This allowed the detection of both prominent topics and sparse or outlier papers. To manage identified outliers, we employed a k-nearest neighbors reassignment step, implemented via FAISS, ensuring all papers were meaningfully assigned to a thematic cluster.</p>
+<p>For cluster interpretation, noun-based bigrams and unigrams were extracted from texts using Spacy’s NLP pipeline. These n-grams were subsequently ranked within clusters using class-based TF-IDF scores to generate descriptive and interpretable cluster topics.</p>
+</section>
+<section id="trend-modeling-and-evaluation">
+<h3>2.5 Trend Modeling and Evaluation<a class="headerlink" href="#trend-modeling-and-evaluation" title="Link to this heading">#</a></h3>
+<p>A crucial objective was to quantify how research interests within clusters evolved over time. For this purpose, we selected four distinct regression models: linear regression, ridge regression, random forest, and gradient boosting. Linear and ridge regressions offered straightforward interpretability, capturing linear temporal trends with or without regularization, respectively. Random forest and gradient boosting were selected as robust, non-linear ensemble methods capable of modeling complex, non-linear temporal dynamics.</p>
+<p>Each model was trained on historical publication counts per cluster, validated against recent years, and evaluated using R² (explained variance) and Root Mean Squared Error (RMSE) metrics. These evaluation criteria were chosen to comprehensively assess model performance in both accuracy and consistency across clusters. Gradient boosting emerged as the best-performing model due to its higher predictive accuracy and superior handling of nonlinear trends, thus selected as the primary method for further detailed analysis and visualization.</p>
+</section>
+<section id="interactive-visualization">
+<h3>2.6 Interactive Visualization<a class="headerlink" href="#interactive-visualization" title="Link to this heading">#</a></h3>
+<p>To facilitate intuitive exploration and interpretation of the analyzed results, interactive visualizations were developed using Plotly and the <code class="docutils literal notranslate"><span class="pre">datamapplot</span></code> library. These interactive tools enabled users to explore thematic distributions, inspect topic growth rates, and access detailed metadata interactively, significantly enhancing the interpretability and accessibility of the results.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<h3 class="rubric" id="table1-sample-of-papers-with-very-short-titles-or-abstracts">Table1: Sample of papers with very short titles or abstracts</h3>
+<p>|   year | title                                                                                                                        | abstract             |   title_length |   abstract_length |
+|——–|——————————————————————————————————————————|———————-|—————-|——————-|
+|   1987 | A Computer Simulation of Cerebral Neocortex: Computational Capabilities of Nonlinear Neural Networks                         | Abstract Unavailable |             12 |                 2 |
+|   1987 | Computing Motion Using Resistive Networks                                                                                    | Abstract Unavailable |              5 |                 2 |
+|   1987 | Ensemble’ Boltzmann Units have Collective Computational Properties like those of Hopfield and Tank Neurons                   | Abstract Unavailable |             14 |                 2 |
+|   1987 | HOW THE CATFISH TRACKS ITS PREY: AN INTERACTIVE “PIPELINED” PROCESSING SYSTEM MAY DIRECT FORAGING VIA RETICULOSPINAL NEURONS | of                   |             17 |                 1 |
+|   1987 | Hierarchical Learning Control - An Approach with Neuron-Like Associative Memories                                            | Advances             |             10 |                 1 |</p>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/52afdad2fb5d94d68b6f4a58872cb847e47fa01ee1064776366d52f6952c683b.png" src="_images/52afdad2fb5d94d68b6f4a58872cb847e47fa01ee1064776366d52f6952c683b.png" />
+<img alt="_images/8cd3fa3577d7f8ddf0c89ea3953f5d5ef09ffb26e736a2a30c1ef6388005e913.png" src="_images/8cd3fa3577d7f8ddf0c89ea3953f5d5ef09ffb26e736a2a30c1ef6388005e913.png" />
+<img alt="_images/2c405e8cb3ccdb2226a63d99b8639cf57996b135c067e8aa5cde9d6e846bc038.png" src="_images/2c405e8cb3ccdb2226a63d99b8639cf57996b135c067e8aa5cde9d6e846bc038.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="results">
+<h2>3 Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<p>In this section, we report preliminary findings from our exploratory data analysis, focusing on publication trends and textual characteristics of accepted NeurIPS papers from 1987 to 2023.</p>
+<section id="data-quality-considerations">
+<h3>3.1 Data Quality Considerations<a class="headerlink" href="#data-quality-considerations" title="Link to this heading">#</a></h3>
+<p>During data preprocessing, we identified several papers with anomalously short abstracts or missing abstract content entirely. Examples of these cases are illustrated in Table 1. Early years, in particular, contained numerous entries marked “Abstract Unavailable,” which were systematically removed from subsequent analyses to maintain data integrity. This filtering ensured that the subsequent embedding-based analyses and modeling were based on high-quality textual data.</p>
+</section>
+<section id="trends-in-publication-volume">
+<h3>3.2 Trends in Publication Volume<a class="headerlink" href="#trends-in-publication-volume" title="Link to this heading">#</a></h3>
+<p>Figure 1 illustrates the annual number of accepted NeurIPS papers. The data reveal a significant increase in the volume of accepted papers, especially notable from approximately 2010 onward. Prior to this period, the conference accepted fewer than 500 papers annually, whereas recent years have seen exponential growth, surpassing 3,500 accepted papers by 2023. This increase likely reflects heightened global research activity and broader community engagement in machine learning and artificial intelligence.</p>
+</section>
+<section id="trends-in-title-length">
+<h3>3.3 Trends in Title Length<a class="headerlink" href="#trends-in-title-length" title="Link to this heading">#</a></h3>
+<p>Figure 2 shows the average title length, measured in number of words, across the studied timeframe. The average title length demonstrates modest fluctuations, remaining consistently within a range of approximately 7 to 9 words. This stability suggests a relatively unchanged practice in summarizing research content concisely within paper titles, despite the overall increase in publication volume and complexity.</p>
+</section>
+<section id="trends-in-abstract-length">
+<h3>3.4 Trends in Abstract Length<a class="headerlink" href="#trends-in-abstract-length" title="Link to this heading">#</a></h3>
+<p>Figure 3 presents the median abstract length (in words) from 1987 to 2023. A clear upward trajectory is evident, particularly noticeable over the past two decades. Initially averaging around 120 words in the early years, the median length of abstracts has gradually increased to approximately 180 words in recent submissions. This trend may reflect the increasing complexity of research questions addressed, the growing sophistication of experimental methodologies, or evolving standards in scientific communication, requiring more comprehensive abstracts.</p>
+<p>These preliminary explorations highlight significant temporal shifts in both publication volumes and textual characteristics of NeurIPS papers. In the subsequent sections, we extend our analysis using embedding-based methods to further elucidate evolving thematic trends within the conference.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<p><strong>Table 2.</strong> Comparative performance of four regression models when the growth‐rate task is trained on NeurIPS data from 1987 to 2024 and evaluated on a 20 % chronological hold-out.  Gradient boosting (gboost) attains the lowest mean RMSE and the least-negative median R², indicating better predictive accuracy than random-forest and linear baselines over the full 37-year window.</p>
+<div class="output text_html">
+  <div id="df-b292eb3a-7ad4-439f-b507-52492779ae7d" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_R2</th>
+      <th>median_R2</th>
+      <th>mean_RMSE</th>
+      <th>median_RMSE</th>
+      <th>n_clusters</th>
+    </tr>
+    <tr>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>gboost</th>
+      <td>-0.917</td>
+      <td>-0.864</td>
+      <td>33.944</td>
+      <td>21.293</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>random_forest</th>
+      <td>-0.967</td>
+      <td>-1.062</td>
+      <td>34.633</td>
+      <td>22.557</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>ridge</th>
+      <td>-2.907</td>
+      <td>-1.126</td>
+      <td>36.415</td>
+      <td>24.730</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>linear</th>
+      <td>-2.910</td>
+      <td>-1.126</td>
+      <td>36.414</td>
+      <td>24.735</td>
+      <td>50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-b292eb3a-7ad4-439f-b507-52492779ae7d')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-b292eb3a-7ad4-439f-b507-52492779ae7d button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-b292eb3a-7ad4-439f-b507-52492779ae7d');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    <div id="df-2e988090-1076-419f-b3d5-f9eb07e5c611">
+      <button class="colab-df-quickchart" onclick="quickchart('df-2e988090-1076-419f-b3d5-f9eb07e5c611')"
+                title="Suggest charts"
+                style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+      </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+      <script>
+        async function quickchart(key) {
+          const quickchartButtonEl =
+            document.querySelector('#' + key + ' button');
+          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+          quickchartButtonEl.classList.add('colab-df-spinner');
+          try {
+            const charts = await google.colab.kernel.invokeFunction(
+                'suggestCharts', [key], {});
+          } catch (error) {
+            console.error('Error during call to suggestCharts:', error);
+          }
+          quickchartButtonEl.classList.remove('colab-df-spinner');
+          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+        }
+        (() => {
+          let quickchartButtonEl =
+            document.querySelector('#df-2e988090-1076-419f-b3d5-f9eb07e5c611 button');
+          quickchartButtonEl.style.display =
+            google.colab.kernel.accessAllowed ? 'block' : 'none';
+        })();
+      </script>
+    </div>
+
+  <div id="id_4d80d672-e649-43e8-ba77-c2bca7980606">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('summary_8724')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_4d80d672-e649-43e8-ba77-c2bca7980606 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('summary_8724');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<p><strong>Table 3.</strong> Model performance when the analysis window is restricted to papers published between 2000 and 2024.  Predictive errors drop for all methods, and gradient boosting again achieves the best combination of RMSE and R², suggesting that non-linear ensemble approaches capture recent topic dynamics more effectively than linear alternatives.</p>
+<div class="output text_html">
+  <div id="df-e9aab218-dc64-4101-9145-5e0941e5995c" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_R2</th>
+      <th>median_R2</th>
+      <th>mean_RMSE</th>
+      <th>median_RMSE</th>
+      <th>n_clusters</th>
+    </tr>
+    <tr>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>gboost</th>
+      <td>-0.529</td>
+      <td>-0.418</td>
+      <td>30.875</td>
+      <td>21.435</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>random_forest</th>
+      <td>-0.570</td>
+      <td>-0.446</td>
+      <td>32.484</td>
+      <td>22.317</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>ridge</th>
+      <td>-1.081</td>
+      <td>-1.062</td>
+      <td>37.372</td>
+      <td>25.449</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>linear</th>
+      <td>-1.081</td>
+      <td>-1.064</td>
+      <td>37.366</td>
+      <td>25.462</td>
+      <td>50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e9aab218-dc64-4101-9145-5e0941e5995c')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-e9aab218-dc64-4101-9145-5e0941e5995c button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-e9aab218-dc64-4101-9145-5e0941e5995c');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    <div id="df-52035863-cd28-4aec-ab15-b9406160ef33">
+      <button class="colab-df-quickchart" onclick="quickchart('df-52035863-cd28-4aec-ab15-b9406160ef33')"
+                title="Suggest charts"
+                style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+      </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+      <script>
+        async function quickchart(key) {
+          const quickchartButtonEl =
+            document.querySelector('#' + key + ' button');
+          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+          quickchartButtonEl.classList.add('colab-df-spinner');
+          try {
+            const charts = await google.colab.kernel.invokeFunction(
+                'suggestCharts', [key], {});
+          } catch (error) {
+            console.error('Error during call to suggestCharts:', error);
+          }
+          quickchartButtonEl.classList.remove('colab-df-spinner');
+          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+        }
+        (() => {
+          let quickchartButtonEl =
+            document.querySelector('#df-52035863-cd28-4aec-ab15-b9406160ef33 button');
+          quickchartButtonEl.style.display =
+            google.colab.kernel.accessAllowed ? 'block' : 'none';
+        })();
+      </script>
+    </div>
+
+  <div id="id_23e09b28-0376-454b-9a0b-d46cf4ed7a47">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('summary_0024')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_23e09b28-0376-454b-9a0b-d46cf4ed7a47 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('summary_0024');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section id="performance-of-trend-prediction-models">
+<h3>3.5 Performance of Trend-prediction Models<a class="headerlink" href="#performance-of-trend-prediction-models" title="Link to this heading">#</a></h3>
+<p>Tables 2 and 3 compare four regression approaches—ordinary least squares (“linear”), ridge regression, random forest, and gradient boosting (gboost)—on predicting the number of NeurIPS papers per topic cluster annually.</p>
+<p>Gradient boosting combines multiple shallow decision trees, iteratively correcting the errors (residuals) of previous trees. This method is particularly suited to capturing non-linear or abrupt trends, such as sudden bursts of research activity after periods of relative inactivity—patterns frequently observed in research data that linear models struggle to capture.</p>
+<p>Across both analysis periods (1987–2024 and 2000–2024), gradient boosting consistently achieves the lowest prediction error and the highest (least-negative) R² values. Due to its superior performance, we rely on gradient boosting to inform subsequent visualizations and interpretations of topic growth trajectories.</p>
+</section>
+<section id="topic-landscape-and-growth-patterns">
+<h3>3.6 Topic Landscape and Growth Patterns<a class="headerlink" href="#topic-landscape-and-growth-patterns" title="Link to this heading">#</a></h3>
+<section id="long-term-trends-1987-2024">
+<h4>3.6.1 Long-term Trends (1987-2024)<a class="headerlink" href="#long-term-trends-1987-2024" title="Link to this heading">#</a></h4>
+<p>The embedding visualization represents each NeurIPS paper as a single dot within a two-dimensional UMAP projection. Colors reflect the growth trends computed using gradient boosting from the entire dataset spanning 37 years (red indicates increasing popularity, blue indicates decreasing popularity).</p>
+<p>The most rapidly expanding topic cluster over this period is broadly labelled as “algorithm problem method,” centrally positioned within the visualization. This suggests that the core methodologies and algorithmic frameworks have consistently driven research interest across multiple decades. This cluster captures foundational methods such as optimization techniques, learning algorithms, and general computational approaches, underscoring the sustained focus on methodological innovations as a key driver of progress within NeurIPS.</p>
+<p>Conversely, topic clusters related to early-stage neural computation and biological neuron simulation—such as “neuron simulation” and “PDE network”—are predominantly blue, indicating diminished interest over time. This shift likely reflects a transition from foundational neural simulation toward more sophisticated machine learning architectures.</p>
+</section>
+<section id="recent-trends-2020-2024">
+<h4>3.6.2 Recent Trends (2020-2024)<a class="headerlink" href="#recent-trends-2020-2024" title="Link to this heading">#</a></h4>
+<p>When focusing solely on recent years, the strongest area of growth distinctly shifts towards “reinforcement learning/policy learning.” This cluster appears prominently red, clearly reflecting intensified research interest driven by notable breakthroughs and practical applications in reinforcement learning (RL). Indeed, since seminal advancements such as AlphaGo (2016), RL has increasingly become a central theme in contemporary machine learning research, influencing a broad range of real-world applications.</p>
+<p>Meanwhile, traditionally active areas like generic neural network training and simpler bandit algorithm formulations have slowed, evident by their pale coloration, suggesting a relative decrease in submissions to NeurIPS. The fading interest in generic methods is likely due to specialization and the emergence of dedicated conferences or subfields elsewhere in the academic landscape.</p>
+</section>
+<section id="interpretation-and-insights">
+<h4>3.6.3 Interpretation and Insights<a class="headerlink" href="#interpretation-and-insights" title="Link to this heading">#</a></h4>
+<p>Integrating both the long-term (1987-2024) and short-term (2020-2024) perspectives reveals a notable evolution in research priorities. Historically, the most influential and consistently expanding area within NeurIPS has been general algorithmic and methodological research—reflecting a broad community focus on developing universal frameworks and optimization techniques applicable to various problem domains.</p>
+<p>More recently, the emphasis has noticeably shifted towards reinforcement learning and policy-driven methodologies, reflecting a contemporary trend toward application-oriented and real-world impactful research. This shift aligns with broader developments in artificial intelligence research, marked by increased investments in RL applications such as robotics, strategic games, autonomous systems, and decision-making frameworks.</p>
+</section>
+</section>
+</section>
+<section id="conclusions-and-summary">
+<h2>4.Conclusions and Summary<a class="headerlink" href="#conclusions-and-summary" title="Link to this heading">#</a></h2>
+<p>This study explored the evolution of research themes and publication characteristics within NeurIPS from 1987 to 2024, revealing substantial growth in overall participation and significant shifts in research interests. Our findings highlight several key insights into the dynamics of the NeurIPS community:</p>
+<ul class="simple">
+<li><p><strong>Publication Growth</strong>: The exponential increase in the volume of accepted papers over the years underscores NeurIPS’s pivotal role as a central hub for machine learning research. This growth likely reflects both increased global research activity in artificial intelligence and the expanded accessibility of the conference itself.</p></li>
+<li><p><strong>Evolution of Paper Content</strong>: Median abstract lengths have steadily increased, indicating a trend towards more detailed, nuanced, and comprehensive descriptions. This change could reflect rising methodological complexity or heightened expectations for rigorous validation and reproducibility.</p></li>
+<li><p><strong>Topic Dynamics and Embedding Analysis</strong>: Embedding-based analysis identified long-term and recent shifts in research interests. Historically, general algorithmic and methodological frameworks dominated, emphasizing fundamental, broad applicability. However, recent trends prominently feature reinforcement learning, aligning closely with advancements in real-world applications and high-impact practical research. This demonstrates the community’s responsiveness to both theoretical innovations and pressing real-world challenges.</p></li>
+<li><p><strong>Predictive Model Insights</strong>: Among the evaluated regression methods—linear regression, ridge regression, random forest, and gradient boosting—the gradient boosting model consistently provided superior predictive accuracy in tracking topic trajectories, effectively capturing non-linear dynamics and sudden shifts in topic popularity.</p></li>
+</ul>
+<section id="limitations">
+<h3>4.1 Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h3>
+<p>Despite these insights, several limitations merit acknowledgment:</p>
+<ul class="simple">
+<li><p><strong>Data Completeness and Quality</strong>: Our analysis relied solely on abstracts and titles. The absence of full-text analysis or additional metadata (e.g., author affiliations, citation counts) limits the depth and context of our topic modeling.</p></li>
+<li><p><strong>Temporal Analysis Constraints</strong>: The model’s predictive performance, while superior with gradient boosting, remained modest (negative R² values), indicating inherent variability and complexity in forecasting research trends purely from past publication counts.</p></li>
+<li><p><strong>Embedding Dimensionality and Interpretation</strong>: The embeddings capture semantic similarities effectively, but two-dimensional visualizations inevitably lose information, potentially oversimplifying relationships among topics.</p></li>
+</ul>
+</section>
+<section id="future-directions">
+<h3>4.2 Future Directions<a class="headerlink" href="#future-directions" title="Link to this heading">#</a></h3>
+<p>Future work could address these limitations by integrating additional data sources such as citation information, co-authorship networks, or funding patterns. Moreover, incorporating advanced temporal models, such as deep sequence models or time-series-specific neural architectures, may provide richer insights into the trajectory of scientific topics.</p>
+<p>Overall, this analysis highlights both the growth and specialization trends in NeurIPS research, offering a comprehensive view into how machine learning research continues to adapt and evolve in response to theoretical advancements and practical demands.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">NeurIPS Trends (1987 – 2023)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="interactive_figures.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Interactive Figures {.tabset}</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">2. Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-acquisition">2.1 Data Acquisition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-and-preparation">2.2 Data Cleaning and Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-analysis">2.3 Exploratory Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-and-clustering">2.4 Embedding and Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-modeling-and-evaluation">2.5 Trend Modeling and Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-visualization">2.6 Interactive Visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">3 Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-considerations">3.1 Data Quality Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trends-in-publication-volume">3.2 Trends in Publication Volume</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trends-in-title-length">3.3 Trends in Title Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trends-in-abstract-length">3.4 Trends in Abstract Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-of-trend-prediction-models">3.5 Performance of Trend-prediction Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-landscape-and-growth-patterns">3.6 Topic Landscape and Growth Patterns</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-trends-1987-2024">3.6.1 Long-term Trends (1987-2024)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recent-trends-2020-2024">3.6.2 Recent Trends (2020-2024)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-and-insights">3.6.3 Interpretation and Insights</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions-and-summary">4.Conclusions and Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">4.1 Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions">4.2 Future Directions</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kosei Uemura
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

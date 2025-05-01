@@ -1,0 +1,50 @@
+# ---------------------------------------------------------------------
+#  JSC370 Final Project — NeurIPS Trends (1987-2023)
+# ---------------------------------------------------------------------
+title: JSC370 Final Project
+author: Kosei Uemura
+# logo: logo.png                # uncomment / replace if you have one
+
+# ---------------------------------------------------------------------
+#  Execution behaviour
+# ---------------------------------------------------------------------
+execute:
+  execute_notebooks: "off"      # use outputs already stored in the notebook
+  timeout: -1                   # irrelevant when "off", but explicit
+
+html:
+  extra_head: |
+    <style>
+      div.cell_input {display:none;}
+      button.toggle-button {display:none;}
+    </style>
+
+sphinx:
+  extra_extensions:
+    - sphinx_design
+
+myst_nb:
+  remove_code_source: true
+  remove_code_outputs: false
+
+# ---------------------------------------------------------------------
+#  HTML options
+# ---------------------------------------------------------------------
+html:
+  use_repository_button: true
+  use_issues_button:      true
+  favicon: logo.png                         # optional – reuse logo
+
+# ---------------------------------------------------------------------
+#  Repository info (used for "edit this page" links)
+# ---------------------------------------------------------------------
+repository:
+  url: https://github.com/Kosei1227/<your-repo>  # ← change!
+  branch: main
+  path_to_book: ""           # empty means project root
+
+# ---------------------------------------------------------------------
+#  BibTeX – keep if you cite papers
+# ---------------------------------------------------------------------
+bibtex_bibfiles:
+  - references.bib

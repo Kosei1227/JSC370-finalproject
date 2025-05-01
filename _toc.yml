@@ -1,0 +1,6 @@
+format: jb-book
+root: intro                # ← home page (intro.md)
+
+chapters:
+  - file: embedding_trend_analysis   # ← your .ipynb (no extension)
+  - file: interactive_figures
