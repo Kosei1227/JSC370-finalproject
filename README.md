@@ -37,3 +37,8 @@ jupyter-book build .
 
 Alternatively, open and execute notebooks directly on Google Colab for straightforward replication.
 
+
+Live website: **<https://kosei1227.github.io/JSC370-finalproject/>**
+
+This site hosts my Jupyter-Book report, interactive Plotly dashboards, and all source code.
+
