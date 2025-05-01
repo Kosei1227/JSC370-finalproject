@@ -6,15 +6,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:              # REQUIRED for pages/*
+      contents: read
+      pages: write
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - run: |
-          pip install -r requirements.txt
+          pip install jupyter-book sphinx-design plotly pandas
           jupyter-book build .
-      - uses: peaceiris/actions-gh-pages@v4
+      - uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _build/html
+          path: _build/html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write            # REQUIRED
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v2
