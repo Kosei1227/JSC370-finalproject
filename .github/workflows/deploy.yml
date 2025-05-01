@@ -1,27 +1,37 @@
 name: build-and-deploy-book
+
+# ───────────── trigger ─────────────
 on:
   push:
     branches: [main]
 
+# ───────────── jobs ─────────────
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:              # REQUIRED for pages/*
+
+    permissions:           # REQUIRED for Pages
       contents: read
       pages: write
       id-token: write
 
     steps:
+      # 1) check out code
       - uses: actions/checkout@v4
 
+      # 2) Python + deps
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - run: |
           pip install jupyter-book sphinx-design plotly pandas
-          jupyter-book build .
-      - uses: actions/upload-pages-artifact@v2
+
+      # 3) build the site
+      - run: jupyter-book build .
+
+      # 4) upload the generated HTML to a Pages artifact
+      - uses: actions/upload-pages-artifact@v2     # ✅ still current
         with:
           path: _build/html
 
@@ -29,11 +39,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      pages: write            # REQUIRED
+      pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v2              # official Pages deploy
